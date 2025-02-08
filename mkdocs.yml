@@ -116,12 +116,12 @@ plugins:
         - locale: en
           name: English
           build: true
-          default: true
+          default: false
           site_name: "BentoBox World"
         - locale: zh
           name: 简体中文
           build: true
-          default: false
+          default: true
           site_name: "BentoBox 帮助文档"
           nav_translations:
               "Home": "首页"
