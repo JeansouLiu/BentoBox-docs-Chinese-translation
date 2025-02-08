@@ -4,9 +4,9 @@ import json
 def define_env(env):
 
     languages = [
-        {"id": "zh-CN", "name": "Chinese (China)"},
-        {"id": "zh-HK", "name": "Chinese (Hong Kong)"},
-        {"id": "zh-TW", "name": "Chinese (Taiwan)"},
+        {"id": "zh-CN", "name": "Chinese, China"},
+        {"id": "zh-HK", "name": "Chinese, Hong Kong"},
+        {"id": "zh-TW", "name": "Chinese, Taiwan"},
         {"id": "hr", "name": "Croatian"},
         {"id": "cs", "name": "Czech"},
         {"id": "fr", "name": "French"},
@@ -23,7 +23,9 @@ def define_env(env):
         {"id": "ru", "name": "Russian"},
         {"id": "es", "name": "Spanish"},
         {"id": "tr", "name": "Turkish"},
-        {"id": "vi", "name": "Vietnamese"}
+        {"id": "vi", "name": "Vietnamese"},
+        {"id": "uk", "name": "Ukrainian"},
+        {"id": "nl", "name": "Dutch"}
     ]
 
     @env.macro
@@ -87,15 +89,17 @@ def define_env(env):
             for row in reader:
                 # Analyze the source
                 if (row['source'] != source):
-                    # We are in a new "source" so we have to put the header
-                    source = row['source']
-                    result += f"""\n## {source} placeholders
+                    if ("[gamemode]" in row['placeholder'] or gamemode_name in row['placeholder']):
+                        # We are in a new "source" so we have to put the header
+                        source = row['source']
+                        result += f"""\n## {source} placeholders
 
 | Placeholder | Description | {source} version
 | ---------- | ---------- | ---------- |
 """
 
-                result += f"| %{row['placeholder'].replace('[gamemode]',gamemode_name)}% | {row['desc']} | {row['version']} |\n"
+                if ("[gamemode]" in row['placeholder'] or gamemode_name in row['placeholder']):
+                    result += f"| `%{row['placeholder'].replace('[gamemode]',gamemode_name)}%` | {row['desc']} | {row['version']} |\n"
 
         return result
 
@@ -127,7 +131,7 @@ def define_env(env):
                 # Analyze the source
                 if (row['source'] == source):
                     # We are in our plugin, populate rows
-                    result += f"| %{row['placeholder']}% | {row['desc']} | {row['version']} |\n"
+                    result += f"| `%{row['placeholder']}%` | {row['desc']} | {row['version']} |\n"
 
         return result
 

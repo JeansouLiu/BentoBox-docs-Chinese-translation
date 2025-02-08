@@ -223,7 +223,7 @@ You can find more information how BentoBox custom GUI's works here: [Custom GUI'
 
       Example: 
       ```yaml
-          icon: TIPPED_ARROW:INSTANT_HEAL::::1
+          icon: tipped_arrow{CustomPotionColor:11546150}
           title: level.gui.buttons.previous.name
           description: level.gui.buttons.previous.description
           data:
@@ -393,7 +393,7 @@ You can find more information how BentoBox custom GUI's works here: [Custom GUI'
 
 ## Translations
 
-{{ translations(3013, ["cs", "de", "es", "fr", "hu", "id", "lv", "pl", "ro", "tr", "zh-CN", "ko", "pt", "vi"]) }}
+{{ translations(3013, ["cs", "de", "es", "fr", "hu", "id", "lv", "pl", "ro", "tr", "zh-CN", "ko", "pt", "vi", "ru"]) }}
 
 
 
@@ -492,9 +492,7 @@ The JavaDocs for Level can be found [here](https://ci.codemc.io/job/BentoBoxWorl
 
 ### Addon Request Handlers
 
-Till BentoBox 1.17 we had an issue with accessing data outside BentoBox environment doe to the class loader we used to load addons.
-This meant that data was accessible only from other addons. But BentoBox implemented PlAddon functionality, which means that request
-handlers are not necessary anymore.
+***This API is no longer needed*** because Level is now loaded as a Bukkit Plugin so its methods can be accessed directly. The JavaDocs for Level can be found [here](https://ci.codemc.io/job/BentoBoxWorld/job/Level/ws/target/apidocs/index.html). If you want a player's level for example, you can get it directly from the LevelsManager class methods. However, this documentation is being kept for legacy reasons.
 
 More information about addon request handlers can be found [here](/en/latest/BentoBox/Request-Handler-API---How-plugins-can-get-data-from-addons/)
 
